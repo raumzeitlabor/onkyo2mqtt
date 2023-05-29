@@ -81,9 +81,9 @@ def msghandler(mqc, userdata, msg):
         mytopic = msg.topic[len(args.mqtt_topic):]
         payload = msg.payload.decode()
         if mytopic == "command":
-            sendavr(receiver, payload)
+            sendavr(receiver, str(payload))
         elif mytopic[0:4] == "set/":
-            llcmd = eiscp.core.command_to_iscp(mytopic[4:] + " " + payload)
+            llcmd = eiscp.core.command_to_iscp(mytopic[4:] + " " + str(payload))
             sendavr(receiver, llcmd)
     except Exception as e:
         logging.warning("Error processing MQTT message: %s" % e)
